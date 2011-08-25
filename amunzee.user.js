@@ -4,7 +4,7 @@
 // @namespace    com.carlosefonseca.munzee
 // @author       Carlos Fonseca
 // @description  Turns the Munzee pages amazing
-// @version		 0.1.2
+// @version		 0.1.3
 // ==/UserScript==
 
 
@@ -68,6 +68,11 @@ function main() {
 	// Notes
 	html += '<p style="line-height:1.4em;color:#222;margin:20px 0px;padding:10px 10px;background-color:#E7F0CE">'+obj["Notes"]+'</p>';
 
+	// Links
+	var coord = obj["Decimal"].split(" / ");
+	console.log(coord);
+	html += '<div style="position:absolute;top:0;right:0;text-align:right"><a href="http://maps.google.com/maps?q='+coord[0]+','coord[1]'">Google Maps</a><br/><a href="http://www.geocaching.com/map/beta/default.aspx?lat='+coord[0]+'&lng='+coord[1]+'&z=16">Geocaches</a></div>';
+	console.log('<div style="position:absolute;top:0;right:0;text-align:right"><a href="http://maps.google.com/maps?q='+coord[0]+','coord[1]'">Google Maps</a><br/><a href="http://www.geocaching.com/map/beta/default.aspx?lat='+coord[0]+'&lng='+coord[1]+'&z=16">Geocaches</a></div>');
 	$("#details").html(html);
 }
 
