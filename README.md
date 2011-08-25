@@ -9,6 +9,14 @@ Current features:
 * The Map in munzee.com/map is totally fullscreen
 * The "Welcome back *user-name*" at the top of the page links the the public user page where the Captured Munzees are displayed
 
+
+## Install ##
+
+Open the .user.js file in Google Chrome, or other browser that has GreaseMonkey and enjoy.
+
+
+
+
 Some ideas I have:
 
 * Make the Map start at a position defined by the URL
