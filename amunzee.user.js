@@ -27,7 +27,7 @@ function main() {
 	var map = $("#mapCanvas", "#body-box-content .content-box:first").detach();
 	if (map.length == 0) return;
 	var fulltxt = $("#body-box-content .content-box:first").text();
-	$("#body-box-content .content-box:first").css("padding","20px").html($("<div id='details'></div>")).append(map);
+	$("#body-box-content .content-box:first").css("padding","20px").html($("<div id='details' style='position:relative'></div>")).append(map);
 	initialize();
 
 	var obj = new Object();
@@ -69,10 +69,9 @@ function main() {
 	html += '<p style="line-height:1.4em;color:#222;margin:20px 0px;padding:10px 10px;background-color:#E7F0CE">'+obj["Notes"]+'</p>';
 
 	// Links
-	var coord = obj["Decimal"].split(" / ");
-	console.log(coord);
-	html += '<div style="position:absolute;top:0;right:0;text-align:right"><a href="http://maps.google.com/maps?q='+coord[0]+','coord[1]'">Google Maps</a><br/><a href="http://www.geocaching.com/map/beta/default.aspx?lat='+coord[0]+'&lng='+coord[1]+'&z=16">Geocaches</a></div>';
-	console.log('<div style="position:absolute;top:0;right:0;text-align:right"><a href="http://maps.google.com/maps?q='+coord[0]+','coord[1]'">Google Maps</a><br/><a href="http://www.geocaching.com/map/beta/default.aspx?lat='+coord[0]+'&lng='+coord[1]+'&z=16">Geocaches</a></div>');
+	var coord = obj["Decimal"].replace(/ /g,"").split("/");
+	html += '<div style="position:absolute;top:0;right:0;text-align:right">View in:<a href="http://maps.google.com/maps?q='+coord[0]+','+coord[1]+'">Google Maps</a><br/><a href="http://www.geocaching.com/map/beta/default.aspx?lat='+coord[0]+'&lng='+coord[1]+'&z=16">Geocaching</a></div>';
+	
 	$("#details").html(html);
 }
 
