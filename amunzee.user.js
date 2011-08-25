@@ -4,14 +4,14 @@
 // @namespace    com.carlosefonseca.munzee
 // @author       Carlos Fonseca
 // @description  Turns the Munzee pages amazing
-// @version		 0.1.3
+// @version		 0.1.4
 // ==/UserScript==
 
 
 // attaches the script to the body of the page allowing it to use the jQuery it already has
 function addJQuery(callback) {
 	var style = document.createElement("style");
-	style.textContent = "#mapCanvas { width: 100% !important; } #map { position:absolute !important; height:100% !important; width:100% !important; left: 0 !important; top: 0 !important; z-index: 1000;}";
+	style.textContent = "#mapCanvas { width: 100% !important; } #map { position:absolute !important; height:100% !important; width:100% !important; left: 0 !important; top: 0 !important; z-index: 1000;} small { font-size: 90% }";
 	document.body.appendChild(style);
 
     var script = document.createElement("script");
@@ -70,9 +70,20 @@ function main() {
 
 	// Links
 	var coord = obj["Decimal"].replace(/ /g,"").split("/");
-	html += '<div style="position:absolute;top:0;right:0;text-align:right">View in:<a href="http://maps.google.com/maps?q='+coord[0]+','+coord[1]+'">Google Maps</a><br/><a href="http://www.geocaching.com/map/beta/default.aspx?lat='+coord[0]+'&lng='+coord[1]+'&z=16">Geocaching</a></div>';
+	html += '<div style="position:absolute;top:0;right:0;text-align:right;line-height:1.5em">View in:<br><a href="http://maps.google.com/maps?q='+coord[0]+','+coord[1]+'">Google Maps</a><br/><a href="http://www.geocaching.com/map/beta/default.aspx?lat='+coord[0]+'&lng='+coord[1]+'&z=16">Geocaching</a></div>';
 	
 	$("#details").html(html);
+	
+	
+	// Capture List
+	var newtxt = "";
+	var txt = $("#body-box-content > .content-box:nth-child(4)").html();
+	txt = $.trim(txt).replace(/\n\s*/g,"\n");
+	var patt = /(<a[^>]+>[^>]+>) - (2.*)<br>\n/g;
+	while(match = patt.exec(txt)) {
+		newtxt += "<small>"+match[2]+"</small> &nbsp; "+match[1]+"<br>\n";
+	}
+	$("#body-box-content > .content-box:nth-child(4)").html(newtxt);
 }
 
 
