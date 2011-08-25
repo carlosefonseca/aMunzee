@@ -28,6 +28,7 @@ function main() {
 	if (map.length == 0) return;
 	var fulltxt = $("#body-box-content .content-box:first").text();
 	$("#body-box-content .content-box:first").css("padding","20px").html($("<div id='details'></div>")).append(map);
+	initialize();
 
 	var obj = new Object();
 
