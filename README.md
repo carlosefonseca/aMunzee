@@ -8,6 +8,7 @@ Feel free to comment and add stuff.
 
 * The Munzee info (munzee.com/m/user/#) is much better now, with clear text and divided contents.
 * The map in the Munzee info page occupies the whole width of the content
+* Links for the munzee position in Google Maps and Geocaching.com
 * The Map in munzee.com/map is totally fullscreen
 * The "Welcome back *user-name*" at the top of the page links the the public user page where the Captured Munzees are displayed
 
