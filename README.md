@@ -23,7 +23,7 @@ Another options is to manually open the linked file whith Google Chrome, or othe
 
 
 ## Some ideas I have for later ##
-
 * Make the Map start at a position defined by the URL
 * Use a different color for the Munzees already found on the map
 * Avoid downloading all 10K munzees to see the map
+* I'd like to have auto-update but I guess it's not possible for user scripts. Or I'll have to change to browser extensions or updates will be based on reinstalling…
