@@ -17,7 +17,7 @@ Open the .user.js file in Google Chrome, or other browser that has GreaseMonkey 
 
 
 
-Some ideas I have:
+## Some ideas I have for later ##
 
 * Make the Map start at a position defined by the URL
 * Use a different color for the Munzees already found on the map
