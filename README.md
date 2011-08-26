@@ -2,6 +2,8 @@
 
 This is a user-script to fix some problems with the Munzee.com site. It's a work in progress but helps ease the pain of using the site.
 
+Feel free to comment and add stuff.
+
 Current features:
 
 * The Munzee info (munzee.com/m/user/#) is much better now, with clear text and divided contents.
