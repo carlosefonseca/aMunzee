@@ -4,7 +4,7 @@
 // @namespace    com.carlosefonseca.munzee
 // @author       Carlos Fonseca
 // @description  Turns the Munzee pages amazing
-// @version		 0.1.4
+// @version		 0.2.0
 // ==/UserScript==
 
 
@@ -28,7 +28,7 @@ function main() {
 		return;
 
 	var map = $("#mapCanvas", "#body-box-content .content-box:first").detach();
-	var fulltxt = $("#body-box-content .content-box:first").text();
+	var fulltxt = $("#body-box-content .content-box:first").html();
 	$("#body-box-content .content-box:first").css("padding","20px").html($("<div id='details' style='position:relative'></div>")).append(map);
 
 	var obj = new Object();
@@ -38,10 +38,15 @@ function main() {
 	notesStart = fulltxt.indexOf(notesSTR);
 	notesEnd = fulltxt.search(/\s*Deployed At:/);
 	obj["Notes"] = fulltxt.slice(notesStart+notesSTR.length, notesEnd);
-	obj["Notes"] = $.trim(obj["Notes"]).replace(/\n/g,"<br/>\n");
+	if (obj["Notes"].indexOf("<br")==-1) {
+		obj["Notes"] = $.trim(obj["Notes"]).replace(/\n/g,"<br/>\n");
+	} else {
+		obj["Notes"] = $.trim(obj["Notes"]).replace(/^(\<b\>|\<br\s*\>|\s)*/,"");
+	}
 
-	txt = fulltxt.slice(0,notesStart)+fulltxt.slice(notesEnd);
-
+	text = fulltxt.slice(0,notesStart)+fulltxt.slice(notesEnd);
+	txt = $("<p>"+text+"</p>").text();
+	
 	// split the rest of the text-data
 	var patt=/\s*([^:]+): (.*)\s*/g;
 	while (match = patt.exec(txt)) {
@@ -71,7 +76,7 @@ function main() {
 	}
 
 	// Notes
-	html += '<p style="line-height:1.4em;color:#222;margin:20px 0px;padding:10px 10px;background-color:#E7F0CE">'+obj["Notes"]+'</p>';
+	html += '<div style="line-height:1.4em;color:#222;margin:20px 0px;padding:10px 10px;background-color:#E7F0CE">'+obj["Notes"]+'</div>';
 
 	// Links
 	if (obj["Deployed"]=="YES") {
