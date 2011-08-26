@@ -14,7 +14,10 @@ Feel free to comment and add stuff.
 
 ## Install ##
 
-Open the .user.js file in Google Chrome, or other browser that has GreaseMonkey and enjoy.
+If you're on Chrome or other GreaseMonkey-supported browser, [click here](https://github.com/carlosefonseca/aMunzee/raw/master/amunzee.user.js) to install.
+
+
+Another options is to manually open the linked file whith Google Chrome, or other browser that has GreaseMonkey and enjoy.
 
 
 
