@@ -22,7 +22,7 @@ function addJQuery(callback) {
 
 // the guts of this userscript
 function main() {
-	$("#logged-in-message").html($("#logged-in-message").html().replace(/back, (.+)\. | </,'<a href="http://www.munzee.com/m/$1">$1</a> |'))
+	$("#logged-in-message").html($("#logged-in-message").html().replace(/back, (.+)\. | </,'<a href="http://www.munzee.com/m/$1">$1</a> '))
 
 	var map = $("#mapCanvas", "#body-box-content .content-box:first").detach();
 	if (map.length == 0) return;
