@@ -22,13 +22,14 @@ function addJQuery(callback) {
 
 // the guts of this userscript
 function main() {
-	$("#logged-in-message").html($("#logged-in-message").html().replace(/back, (.+)\. | </,'<a href="http://www.munzee.com/m/$1" title="Your public profile page">$1</a> '))
+	$("#logged-in-message").html($("#logged-in-message").html().replace(/back, (.+)\. \| </,'<a href="http://www.munzee.com/m/$1" title="Your public profile page">$1</a> | </'))
+
+	if ($("#body-box-content h1:first").text() != "Munzee Details")
+		return;
 
 	var map = $("#mapCanvas", "#body-box-content .content-box:first").detach();
-	if (map.length == 0) return;
 	var fulltxt = $("#body-box-content .content-box:first").text();
 	$("#body-box-content .content-box:first").css("padding","20px").html($("<div id='details' style='position:relative'></div>")).append(map);
-	initialize();
 
 	var obj = new Object();
 
@@ -45,6 +46,10 @@ function main() {
 	var patt=/\s*([^:]+): (.*)\s*/g;
 	while (match = patt.exec(txt)) {
 		obj[match[1]] = match[2];
+	}
+
+	if (obj["Deployed"]=="YES") {
+		initialize();
 	}
 
 	// Title
@@ -69,9 +74,11 @@ function main() {
 	html += '<p style="line-height:1.4em;color:#222;margin:20px 0px;padding:10px 10px;background-color:#E7F0CE">'+obj["Notes"]+'</p>';
 
 	// Links
-	var coord = obj["Decimal"].replace(/ /g,"").split("/");
-	html += '<div style="position:absolute;top:0;right:0;text-align:right;line-height:1.5em">View in:<br><a href="http://maps.google.com/maps?q='+coord[0]+','+coord[1]+'">Google Maps</a><br/><a href="http://www.geocaching.com/map/beta/default.aspx?lat='+coord[0]+'&lng='+coord[1]+'&z=16">Geocaching</a></div>';
-	
+	if (obj["Deployed"]=="YES") {
+		var coord = obj["Decimal"].replace(/ /g,"").split("/");
+		html += '<div style="position:absolute;top:0;right:0;text-align:right;line-height:1.5em">View in:<br><a href="http://maps.google.com/maps?q='+coord[0]+','+coord[1]+'">Google Maps</a><br/><a href="http://www.geocaching.com/map/beta/default.aspx?lat='+coord[0]+'&lng='+coord[1]+'&z=16">Geocaching</a></div>';
+	}
+
 	$("#details").html(html);
 	
 	
@@ -79,10 +86,11 @@ function main() {
 	var newtxt = "";
 	var txt = $("#body-box-content > .content-box:nth-child(4)").html();
 	txt = $.trim(txt).replace(/\n\s*/g,"\n");
-	var patt = /(<a[^>]+>[^>]+>) - (2.*)<br>\n/g;
+	var patt = /(<a[^>]+>[^>]+>) - (2.*)<br>/g;
 	while(match = patt.exec(txt)) {
 		newtxt += "<small>"+match[2]+"</small> &nbsp; "+match[1]+"<br>\n";
 	}
+	
 	$("#body-box-content > .content-box:nth-child(4)").html(newtxt);
 }
 
